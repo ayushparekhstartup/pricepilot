@@ -1,10 +1,12 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="min-h-[calc(100vh)] bg-white text-zinc-900 dark:bg-black dark:text-zinc-50">
       <header className="sticky top-0 z-20 border-b border-black/5 bg-white/70 backdrop-blur dark:border-white/10 dark:bg-black/40">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
-          <a
-            href="#"
+          <Link
+            href="/"
             className="inline-flex items-center gap-2 font-semibold tracking-tight"
             aria-label="PricePilot home"
           >
@@ -12,23 +14,23 @@ export default function Home() {
               PP
             </span>
             <span className="text-base">PricePilot</span>
-          </a>
+          </Link>
 
           <nav className="hidden items-center gap-8 text-sm text-zinc-600 dark:text-zinc-300 md:flex">
             <a className="hover:text-zinc-900 dark:hover:text-white" href="#features">
               Features
             </a>
-            <a className="hover:text-zinc-900 dark:hover:text-white" href="#get-started">
+            <Link className="hover:text-zinc-900 dark:hover:text-white" href="/signup">
               Get Started
-            </a>
+            </Link>
           </nav>
 
-          <a
-            href="#get-started"
+          <Link
+            href="/signup"
             className="inline-flex h-10 items-center justify-center rounded-full bg-zinc-900 px-4 text-sm font-medium text-white shadow-sm transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -55,12 +57,12 @@ export default function Home() {
               </p>
 
               <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
-                <a
-                  href="#get-started"
+                <Link
+                  href="/signup"
                   className="inline-flex h-12 items-center justify-center rounded-full bg-indigo-600 px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Get Started
-                </a>
+                </Link>
                 <a
                   href="#features"
                   className="inline-flex h-12 items-center justify-center rounded-full border border-black/10 bg-white/70 px-6 text-sm font-semibold text-zinc-900 shadow-sm backdrop-blur transition hover:bg-white dark:border-white/10 dark:bg-black/40 dark:text-white dark:hover:bg-black/60"
@@ -199,12 +201,12 @@ export default function Home() {
                     Start with a quick setup and see recommended price moves tailored to your business.
                   </p>
                 </div>
-                <a
-                  href="#"
+                <Link
+                  href="/signup"
                   className="inline-flex h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-zinc-900 shadow-sm transition hover:bg-white/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   Get Started
-                </a>
+                </Link>
               </div>
             </div>
 

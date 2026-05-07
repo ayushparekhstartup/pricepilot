@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 
 function LogoMark() {
@@ -44,6 +45,7 @@ function Field({
 
 export default function SignupPage() {
   const [submitting, setSubmitting] = React.useState(false);
+  const router = useRouter();
 
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 dark:bg-black dark:text-zinc-50">
@@ -67,7 +69,7 @@ export default function SignupPage() {
               onSubmit={(e) => {
                 e.preventDefault();
                 setSubmitting(true);
-                window.setTimeout(() => setSubmitting(false), 700);
+                window.setTimeout(() => router.push("/dashboard"), 350);
               }}
               className="space-y-5"
             >
