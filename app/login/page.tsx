@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
+import { getSupabaseClient, getSupabaseConfigError } from "@/lib/supabase";
 
 function LogoMark() {
   return (
@@ -45,7 +46,9 @@ function Field({
 
 export default function LoginPage() {
   const [submitting, setSubmitting] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
   const router = useRouter();
+  const configError = getSupabaseConfigError();
 
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-900 dark:bg-black dark:text-zinc-50">
@@ -66,10 +69,40 @@ export default function LoginPage() {
 
           <div className="rounded-3xl border border-black/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-zinc-950">
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
+                setError(null);
+                if (configError) {
+                  setError(configError);
+                  return;
+                }
                 setSubmitting(true);
-                window.setTimeout(() => router.push("/dashboard"), 350);
+                try {
+                  const form = e.currentTarget;
+                  const formData = new FormData(form);
+                  const email = String(formData.get("email") ?? "").trim();
+                  const password = String(formData.get("password") ?? "");
+
+                  const supabase = getSupabaseClient();
+                  if (!supabase) {
+                    setError("Supabase is not configured.");
+                    return;
+                  }
+
+                  const { error: signInError } = await supabase.auth.signInWithPassword({
+                    email,
+                    password,
+                  });
+
+                  if (signInError) {
+                    setError(signInError.message);
+                    return;
+                  }
+
+                  router.push("/dashboard");
+                } finally {
+                  setSubmitting(false);
+                }
               }}
               className="space-y-5"
             >
@@ -96,6 +129,12 @@ export default function LoginPage() {
                 {submitting ? "Logging in..." : "Log in"}
               </button>
 
+              {error ? (
+                <div className="rounded-2xl border border-rose-500/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-700 dark:text-rose-300">
+                  {error}
+                </div>
+              ) : null}
+
               <p className="text-center text-sm text-zinc-600 dark:text-zinc-300">
                 Don&apos;t have an account?{" "}
                 <Link
@@ -109,7 +148,7 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-6 text-center text-xs text-zinc-500 dark:text-zinc-400">
-            Demo UI only — no backend authentication yet.
+            Uses Supabase Auth (email + password).
           </div>
         </div>
       </main>
