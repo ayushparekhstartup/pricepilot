@@ -251,7 +251,7 @@ export default function DashboardPage() {
             <div>
               <h2 className="text-base font-semibold tracking-tight">Recommendations table</h2>
               <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
-                Powered by Anthropic Claude (claude-sonnet-4-20250514).
+                Powered by Anthropic Claude (claude-sonnet-4-5).
               </p>
             </div>
           </div>
