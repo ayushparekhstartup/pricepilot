@@ -187,6 +187,12 @@ export default function DashboardPage() {
             >
               Costs
             </Link>
+            <Link
+              href="/competitors"
+              className="inline-flex h-9 items-center justify-center rounded-full border border-black/10 bg-white/70 px-4 text-sm font-medium text-zinc-900 shadow-sm transition hover:bg-zinc-50 dark:border-white/10 dark:bg-black/40 dark:text-zinc-50 dark:hover:bg-white/10"
+            >
+              Competitors
+            </Link>
             <button
               type="button"
               onClick={() => void loadRecommendations()}
